@@ -14,11 +14,6 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
   }
 
   console.log("getting ready to be a buzz kill...");
-  var injectDetails = {
-    // "code": "document.addEventListener('scroll', buzzkill);",
-    "code": "document.body.bgColor='red'"
-  };
-
   chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
 
 });
