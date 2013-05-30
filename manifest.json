@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+
+  "name": "BuzzKill",
+  "description": "Cause secretly, we all hate BuzzFeed a little bit.",
+  "version": "0.1",
+
+  "icons": {
+    "512": "bf-icon.jpeg"
+  },
+
+  "permissions": [
+    "https://www.facebook.com/",
+    "http://www.facebook.com/",
+    "tabs"
+  ],
+
+  "background": {
+    "scripts": ["bootstrap.js"],
+    "persistent": false
+  },
+
+  "page_action": {
+    "default_title": "BuzzKill",
+    "default_icon": "bf-icon.jpeg"
+  }
+
+  // "content_scripts": [
+  //   {
+  //     "matches": ["https://www.facebook.com/", "http://www.facebook.com/"],
+  //     "js": ["buzzkill.js"]
+  //   }
+  // ]
+}
