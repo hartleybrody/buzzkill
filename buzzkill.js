@@ -2,23 +2,18 @@ var killed_stories = [];
 
 function buzzkill(){
 
-  // get all the news feed stories
+  // be a buzz kill in the news feed & groups
   stories = document.getElementsByClassName("uiUnifiedStory");
 
   for(var i=0; i < stories.length; i++){
     var story = stories[i];
 
-    // find any URL captions (should only be one)
+    // find any URL captions in the story (should only be one)
     var captions = story.getElementsByClassName("caption");
     for(var j=0; j < captions.length; j++){
 
-      if (captions[j].textContent == "www.buzzfeed.com"){
-        //story.style.display = "none";
-        story.style.opacity = "0.1";
-        if (killed_stories.indexOf(story) == -1){
-          console.log("got a url story");
-          killed_stories.push(story);
-        }
+      if (captions[j].textContent.toLowerCase().indexOf("buzzfeed.com") !== -1 ){
+        killItem(story, "url");
       }
     }
 
@@ -28,14 +23,31 @@ function buzzkill(){
       var actor = actors[k];
 
       if (actor.href.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1 ){
-        //story.style.display = "none";
-        story.style.opacity = "0.1";
-        if (killed_stories.indexOf(story) == -1){
-          console.log("got a page story");
-          killed_stories.push(story);
-        }
+        killItem(story, "page");
       }
     }
+  }
+
+  // be a buzz kill on people's walls
+  wall_posts = document.getElementsByClassName("fbTimelineUnit");
+
+  for(var i=0; i < wall_posts.length; i++){
+    var post = wall_posts[i];
+    var links = post.getElementsByTagName("a");
+
+    for(var j=0; j < links.length; j++){
+      if (links[j].href.toLowerCase().indexOf("buzzfeed.com") !== -1){
+        killItem(post, "wall post");
+      }
+    }
+  }
+}
+
+function killItem(item, context){
+  item.style.opacity = "0.1";
+  if (killed_stories.indexOf(item) == -1){
+    console.log("got a " + context + " story");
+    killed_stories.push(item);
   }
 
 }
