@@ -19,4 +19,9 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
 });
 
+// Called when the user clicks on the page action.
+chrome.pageAction.onClicked.addListener(function(tab) {
+    chrome.pageAction.show(tab.id);
+});
+
 
