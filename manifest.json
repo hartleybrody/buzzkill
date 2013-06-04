@@ -22,7 +22,8 @@
 
   "page_action": {
     "default_title": "BuzzKill",
-    "default_icon": "bf-icon.jpeg"
+    "default_icon": "bf-icon.jpeg",
+    "default_popup": "popup.html"
   }
 
   // "content_scripts": [
