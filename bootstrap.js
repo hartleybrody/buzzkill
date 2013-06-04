@@ -21,8 +21,26 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
 });
 
-// Called when the user clicks on the page action.
+// show the popup when the user clicks on the page action.
 chrome.pageAction.onClicked.addListener(function(tab) {
     chrome.pageAction.show(tab.id);
 });
+
+
+// update the icon when the user's settings change
+// chrome.storage.onChanged.addListener(function(changes, areaName){
+//     alert("changed settings");
+//     console.log("changed settings");
+//     if (localStorage["be_a_buzzkill"] == "true"){
+//         path = "active-icon.jpeg";
+//     } else {
+//         path = "inactive-icon.jpeg";
+//     }
+//     chrome.tabs.getCurrent( function(tab){
+//         chrome.pageAction.setIcon({
+//             "tabId": tab.id,
+//             "path": path
+//         });
+//     });
+// }); 
 
