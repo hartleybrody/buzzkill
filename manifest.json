@@ -6,7 +6,7 @@
   "version": "0.1",
 
   "icons": {
-    "512": "bf-icon.jpeg"
+    "200": "images/buzzkill-logo.jpg"
   },
 
   "permissions": [
@@ -23,7 +23,7 @@
 
   "page_action": {
     "default_title": "BuzzKill",
-    "default_icon": "bf-icon.jpeg",
+    "default_icon": "images/buzzkill-logo.jpg",
     "default_popup": "popup.html"
   }
 
