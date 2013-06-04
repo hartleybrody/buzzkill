@@ -6,7 +6,7 @@
   "version": "0.1",
 
   "icons": {
-    "200": "images/buzzkill-logo.jpg"
+    "100": "images/buzzkill-logo.jpg"
   },
 
   "permissions": [
