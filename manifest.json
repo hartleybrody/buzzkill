@@ -3,7 +3,7 @@
 
   "name": "BuzzKill",
   "description": "Cause secretly, we all hate BuzzFeed a little bit.",
-  "version": "0.1",
+  "version": "0.1.0.2",
 
   "icons": {
     "128": "images/buzzkill-logo.jpg"
