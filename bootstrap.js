@@ -1,12 +1,12 @@
 
 // Listen for any changes to the URL of any tab.
+// see: http://developer.chrome.com/extensions/tabs.html#event-onUpdated
 chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
-  // see: http://developer.chrome.com/extensions/tabs.html#event-onUpdated
-  if (tab.status !== "complete"){
-    console.log("not yet");
-    return;
-  }
+  // if (tab.status !== "complete"){
+  //   console.log("not yet");
+  //   return;
+  // }
 
   if (tab.url.toLowerCase().indexOf("facebook.com") === -1){
     console.log("not here");
