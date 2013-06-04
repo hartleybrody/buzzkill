@@ -27,10 +27,4 @@
     "default_popup": "popup.html"
   }
 
-  // "content_scripts": [
-  //   {
-  //     "matches": ["https://www.facebook.com/", "http://www.facebook.com/"],
-  //     "js": ["buzzkill.js"]
-  //   }
-  // ]
 }
