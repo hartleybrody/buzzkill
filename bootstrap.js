@@ -14,6 +14,7 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
   }
 
   console.log("getting ready to be a buzz kill...");
+  chrome.pageAction.show(tab.id);
   chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
 
 });
