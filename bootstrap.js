@@ -13,9 +13,11 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
     return;
   }
 
-  console.log("getting ready to be a buzz kill...");
   chrome.pageAction.show(tab.id);
-  chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
+  if(localStorage["be_a_buzzkill"] == "true"){
+    console.log("getting ready to be a buzz kill...");
+    chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
+  }
 
 });
 

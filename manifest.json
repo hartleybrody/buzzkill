@@ -12,7 +12,8 @@
   "permissions": [
     "https://www.facebook.com/",
     "http://www.facebook.com/",
-    "tabs"
+    "tabs",
+    "storage"
   ],
 
   "background": {
