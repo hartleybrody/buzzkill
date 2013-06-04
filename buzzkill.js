@@ -35,8 +35,12 @@ function buzzkill(){
     var post = wall_posts[i];
     var links = post.getElementsByTagName("a");
 
+    // any wall posts that contain a buzzfeed url
     for(var j=0; j < links.length; j++){
-      if (links[j].href.toLowerCase().indexOf("buzzfeed.com") !== -1){
+      var href = links[j].href.toLowerCase();
+      if (href.indexOf("buzzfeed.com") !== -1 ||
+          href.indexOf("bzfd.it") !== -1 ||
+          href.indexOf("facebook.com/buzzfeed") !== -1){
         killItem(post, "wall post");
       }
     }
@@ -54,4 +58,5 @@ function killItem(item, context){
 
 // be gone, productivity destroyers!
 console.log("Killing all the buzz in your feed...");
+buzzkill();
 document.addEventListener("scroll", buzzkill);
