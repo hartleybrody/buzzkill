@@ -49,6 +49,7 @@ function buzzkill(){
 
 function killItem(item, context){
   item.style.opacity = "0.1";
+  item.style.display = "None";
   if (killed_stories.indexOf(item) == -1){
     console.log("got a " + context + " story");
     killed_stories.push(item);
