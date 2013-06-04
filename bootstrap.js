@@ -3,10 +3,10 @@
 // see: http://developer.chrome.com/extensions/tabs.html#event-onUpdated
 chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
-  // if (tab.status !== "complete"){
-  //   console.log("not yet");
-  //   return;
-  // }
+    // if (tab.status !== "complete"){
+    //     console.log("not yet");
+    //     return;
+    // }
 
     if (tab.url.toLowerCase().indexOf("facebook.com") === -1){
         console.log("not here");
@@ -14,7 +14,7 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
     }
 
     chrome.pageAction.show(tab.id);
-    if(localStorage["be_a_buzzkill"] == "true"){
+    if (localStorage["be_a_buzzkill"] == "true"){
         console.log("getting ready to be a buzz kill...");
         chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
     }
