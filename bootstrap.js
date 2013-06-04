@@ -8,16 +8,16 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
   //   return;
   // }
 
-  if (tab.url.toLowerCase().indexOf("facebook.com") === -1){
-    console.log("not here");
-    return;
-  }
+    if (tab.url.toLowerCase().indexOf("facebook.com") === -1){
+        console.log("not here");
+        return;
+    }
 
-  chrome.pageAction.show(tab.id);
-  if(localStorage["be_a_buzzkill"] == "true"){
-    console.log("getting ready to be a buzz kill...");
-    chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
-  }
+    chrome.pageAction.show(tab.id);
+    if(localStorage["be_a_buzzkill"] == "true"){
+        console.log("getting ready to be a buzz kill...");
+        chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
+    }
 
 });
 
@@ -25,5 +25,4 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
 chrome.pageAction.onClicked.addListener(function(tab) {
     chrome.pageAction.show(tab.id);
 });
-
 
