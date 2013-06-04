@@ -13,6 +13,10 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
         return;
     }
 
+    if (tab.url.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1){
+        chrome.tabs.update({url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
+    }
+
     chrome.pageAction.show(tab.id);
     if (localStorage["be_a_buzzkill"] == "true"){
         console.log("getting ready to be a buzz kill...");
