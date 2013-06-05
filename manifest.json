@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "BuzzKill",
-  "description": "Cause secretly, we all hate BuzzFeed a little bit.",
+  "description": "Reclaim your news feed.",
   "version": "0.1.0.3",
 
   "icons": {
