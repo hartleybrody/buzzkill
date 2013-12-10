@@ -2,28 +2,28 @@ var killed_stories = [];
 
 function buzzkill(){
 
-  // be a buzz kill in the news feed & groups
-  stories = document.getElementsByClassName("uiUnifiedStory");
+  // be a buzz kill in news feed & groups
+  stories = document.getElementsByClassName("_5uch");
 
   for(var i=0; i < stories.length; i++){
     var story = stories[i];
 
-    // find any URL captions in the story (should only be one)
-    var captions = story.getElementsByClassName("caption");
+    // find any divs that contain the word "buzzfeed.com" (ie story captions)
+    var captions = story.getElementsByTagName("div");
     for(var j=0; j < captions.length; j++){
 
       if (captions[j].textContent.toLowerCase().indexOf("buzzfeed.com") !== -1 ){
-        killItem(story, "url");
+        killItem(story, "news feed url");
       }
     }
 
-    // and DEFINITELY block anything from the page itself
-    var actors = story.getElementsByClassName("actorPhoto");
-    for(var k=0; k < actors.length; k++){
-      var actor = actors[k];
+    // look for any links to the buzzfeed fb page
+    var links = story.getElementsByTagName("a");
+    for(var k=0; k < links.length; k++){
+      var link = links[k];
 
       if (actor.href.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1 ){
-        killItem(story, "page");
+        killItem(story, "buzzfeed page");
       }
     }
   }
