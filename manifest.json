@@ -3,7 +3,7 @@
 
   "name": "BuzzKill",
   "description": "Reclaim your news feed.",
-  "version": "1.0.0.0",
+  "version": "1.0.1.0",
 
   "icons": {
     "128": "images/buzzkill-logo.jpg"
