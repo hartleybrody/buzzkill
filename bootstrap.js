@@ -33,16 +33,7 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
     }
 
 });
-//NAlexiou Comments:
-//Since pageAction includes a popup html, this will not trigger based on Chrome documentation.
-//Also, this code essential says this: when the page action (icon) is clicked, display the page action (icon).
-//When Buzzfeed was set to false, the page action would disappear and it would not show up until 
-//the extension was reloaded. Code to display page action was modified in the onUpdate code block.
 
-// // show the popup when the user clicks on the page action.
-// chrome.pageAction.onClicked.addListener(function(tab) {
-//     chrome.pageAction.show(tab.id);
-// });
 
 
 // update the icon when the user's settings change
