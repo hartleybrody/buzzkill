@@ -2,36 +2,17 @@
 chrome.runtime.onInstalled.addListener(function(details) {
     localStorage["be_a_buzzkill"] = true;
 });
+
 // Listen for any changes to the URL of any tab.
 // see: http://developer.chrome.com/extensions/tabs.html#event-onUpdated
 chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
-    // decide if we're ready to inject content script
-    if (tab.status !== "complete"){
-        console.log("not yet");
-        return;
-    }
-    if (tab.url.toLowerCase().indexOf("facebook.com") === -1){
+    // decide if we're ready to show page action
+    if (tab.status !== "complete" || tab.url.toLowerCase().indexOf("facebook.com") === -1){
         console.log("not here");
         return;
     }
-
-    if (tab.url.toLowerCase().indexOf("facebook.com") !== -1){
-            // show the page action if on facebook.com
-        chrome.pageAction.show(tab.id);
-    }
-
-    if (localStorage["be_a_buzzkill"] == "true"){
-
-        if (tab.url.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1){
-            chrome.tabs.update(tab.id, {url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
-        }
-
-        // inject the content script onto the page
-        console.log("getting ready to be a buzz kill...");
-        chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
-    }
-
+    chrome.pageAction.show(tab.id);
 });
 
 
