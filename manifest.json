@@ -24,7 +24,7 @@
    "content_scripts": [
     {
       "matches": ["http://www.facebook.com/*", "https://www.facebook.com/*"],
-      "js": ["jquery.js", "myscript.js"]
+      "js": ["buzzkill.js"]
     }
   ],
 
