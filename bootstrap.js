@@ -16,14 +16,16 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
         return;
     }
 
+    if (tab.url.toLowerCase().indexOf("facebook.com") !== -1){
+            // show the page action if on facebook.com
+        chrome.pageAction.show(tab.id);
+    }
+
     if (localStorage["be_a_buzzkill"] == "true"){
 
         if (tab.url.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1){
             chrome.tabs.update(tab.id, {url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
         }
-
-        // show the page action
-        chrome.pageAction.show(tab.id);
 
         // inject the content script onto the page
         console.log("getting ready to be a buzz kill...");
@@ -32,10 +34,6 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
 });
 
-// show the popup when the user clicks on the page action.
-chrome.pageAction.onClicked.addListener(function(tab) {
-    chrome.pageAction.show(tab.id);
-});
 
 
 // update the icon when the user's settings change
