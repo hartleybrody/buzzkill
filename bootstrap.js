@@ -6,13 +6,15 @@ chrome.runtime.onInstalled.addListener(function(details) {
 // listen for any changes to the URL of any tab.
 chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
-    // don't allow user to get to their page
-    if (tab.url.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1){
-        chrome.tabs.update(tab.id, {url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
-    }
 
     if (tab.url.toLowerCase().indexOf("facebook.com") > -1){
         chrome.pageAction.show(tab.id);
+
+        chrome.storage.sync.get("be_a_buzzkill", function(data){
+            if (data["be_a_buzzkill"] && tab.url.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1){
+                chrome.tabs.update(tab.id, {url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
+            }
+        });
     }
 
 });
