@@ -43,7 +43,7 @@ function killLinks(item, pageType){
     else if (href.indexOf("buzzfeed.com") !== -1 ){
       linkType = "regular link";
     }
-    else if (href.indexOf("thejustice.org") !== -1){
+    else if (href.indexOf("athletics.bowdoin.edu") !== -1){
       linkType = "test link";
     }
 
