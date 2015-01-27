@@ -1,5 +1,6 @@
 var killed_stories = [];
 var storyContainerClasses = ["_5jmm"];
+var bannedDomains = ["facebook.com/buzzfeed", "bzfd.it", "buzzfeed.com"];
 
 var DEBUG = true;
 var DEBUG_DOMAIN = "athletics.bowdoin.edu";
@@ -28,33 +29,18 @@ function buzzkill(){
 
 function killLinks(item){
   var links = item.getElementsByTagName("a");
-  for(var k=0; k < links.length; k++){
-    var link = links[k];
+  _.each(links, function(link){
     var href = link.href.toLowerCase();
-    
-    // decide which type of link it is
-    var linkType = null;
-    if (href.indexOf("facebook.com/buzzfeed") !== -1 ){
-      linkType = "page link";
-    }
-    else if (href.indexOf("bzfd.it") !== -1 ){
-      linkType = "shortened link";
-    }
-    else if (href.indexOf("buzzfeed.com") !== -1 ){
-      linkType = "regular link";
-    }
-    else if (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1){
-      linkType = "test link";
-    }
+    _.each(bannedDomains, function(domain){
+      if (href.indexOf(domain) !== -1 || (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1)){
+        killItem(item);
+      }
+    });
 
-    // kill the story that contains this link
-    if(linkType !== null){
-      killItem(item, linkType);
-    }
-  }
+  });
 }
 
-function killItem(item, linkType){
+function killItem(item){
 
   // set the story to be invisible
   if (DEBUG){
@@ -67,7 +53,7 @@ function killItem(item, linkType){
   // add this story to the list of killed stories
   if (killed_stories.indexOf(item) == -1){
     if (DEBUG){
-      console.log("killed a " + linkType);
+      console.log("killed a link");
     }
     killed_stories.push(item);
   }
