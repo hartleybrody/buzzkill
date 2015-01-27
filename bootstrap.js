@@ -1,39 +1,23 @@
 // when the extension is first installed
 chrome.runtime.onInstalled.addListener(function(details) {
-    localStorage["be_a_buzzkill"] = true;
+    chrome.storage.sync.set({be_a_buzzkill: true});
 });
-// Listen for any changes to the URL of any tab.
-// see: http://developer.chrome.com/extensions/tabs.html#event-onUpdated
+
+// listen for any changes to the URL of any tab.
 chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
-    // decide if we're ready to inject content script
-    if (tab.status !== "complete"){
-        console.log("not yet");
-        return;
-    }
-    if (tab.url.toLowerCase().indexOf("facebook.com") === -1){
-        console.log("not here");
-        return;
-    }
 
-    if (tab.url.toLowerCase().indexOf("facebook.com") !== -1){
-            // show the page action if on facebook.com
+    if (tab.url.toLowerCase().indexOf("facebook.com") > -1){
         chrome.pageAction.show(tab.id);
-    }
 
-    if (localStorage["be_a_buzzkill"] == "true"){
-
-        if (tab.url.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1){
-            chrome.tabs.update(tab.id, {url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
-        }
-
-        // inject the content script onto the page
-        console.log("getting ready to be a buzz kill...");
-        chrome.tabs.executeScript(null, {"file": "buzzkill.js"});
+        chrome.storage.sync.get("be_a_buzzkill", function(data){
+            if (data["be_a_buzzkill"] && tab.url.toLowerCase().indexOf("facebook.com/buzzfeed") !== -1){
+                chrome.tabs.update(tab.id, {url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
+            }
+        });
     }
 
 });
-
 
 
 // update the icon when the user's settings change

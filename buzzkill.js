@@ -1,63 +1,60 @@
 var killed_stories = [];
+var storyContainerClasses = ["_5jmm"];
+var bannedDomains = ["facebook.com/buzzfeed", "bzfd.it", "buzzfeed.com"];
+
+var DEBUG = false;
+var DEBUG_DOMAIN = "athletics.bowdoin.edu";
 
 function buzzkill(){
 
-  // be a buzz kill in news feed & groups
-  stories = document.getElementsByClassName("_5uch");
-  for(var i=0; i < stories.length; i++){
-    var story = stories[i];
-    killLinks(story, "feed");
-
-  }
-
-  // be a buzz kill on people's walls
-  wall_posts = document.getElementsByClassName("fbTimelineUnit");
-  for(var i=0; i < wall_posts.length; i++){
-    var post = wall_posts[i];
-    killLinks(post, "wall");
-  }
+  chrome.storage.sync.get("be_a_buzzkill", function(data){
+    if (data["be_a_buzzkill"]){
+      // find all potential posts
+      _.each(storyContainerClasses, function(storyContainerClass){
+        posts = document.getElementsByClassName(storyContainerClass);
+        _.each(posts, function(post){
+          killLinks(post);
+        });
+      });
+    }
+  });
 }
 
-function killLinks(item, pageType){
+function killLinks(item){
   var links = item.getElementsByTagName("a");
-  for(var k=0; k < links.length; k++){
-    var link = links[k];
+  _.each(links, function(link){
     var href = link.href.toLowerCase();
-    
-    // decide which type of link it is
-    var linkType = null;
-    if (href.indexOf("facebook.com/buzzfeed") !== -1 ){
-      linkType = "page link";
-    }
-    else if (href.indexOf("bzfd.it") !== -1 ){
-      linkType = "shortened link";
-    }
-    else if (href.indexOf("buzzfeed.com") !== -1 ){
-      linkType = "regular link";
-    }
+    _.each(bannedDomains, function(domain){
+      if (href.indexOf(domain) !== -1 || (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1)){
+        killItem(item);
+      }
+    });
 
-    // kill the story that contains this link
-    if(linkType !== null){
-      killItem(item, linkType, pageType);
-    }
-  }
+  });
 }
 
-function killItem(item, linkType, pageType){
+function killItem(item){
 
   // set the story to be invisible
-  item.style.opacity = "0.0";
-  item.style.display = "None";
+  if (DEBUG){
+    item.style.opacity = "0.5";
+  } else {
+    item.style.opacity = "0.0";
+    item.style.display = "None";
+  }
 
   // add this story to the list of killed stories
   if (killed_stories.indexOf(item) == -1){
-    console.log("killed a " + linkType + " on your " + pageType);
+    if (DEBUG){
+      console.log("killed a link");
+    }
     killed_stories.push(item);
   }
 
 }
 
-// be gone, productivity destroyers!
-console.log("Killing all the buzz in your feed...");
-buzzkill();
-document.addEventListener("scroll", buzzkill);
+buzzkill(); // run once on page load
+
+// debounce the function so it's not running constantly
+var scrollBuzzkill = _.debounce(buzzkill, 50);
+document.addEventListener("scroll", scrollBuzzkill);
