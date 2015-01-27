@@ -9,23 +9,16 @@ function buzzkill(){
 
   chrome.storage.sync.get("be_a_buzzkill", function(data){
     if (data["be_a_buzzkill"]){
-
       // find all potential posts
-      for(var i=0; i < storyContainerClasses.length; i++){
-        var storyContainerClass = storyContainerClasses[i];
+      _.each(storyContainerClasses, function(storyContainerClass){
         posts = document.getElementsByClassName(storyContainerClass);
-
-        for(var j=0; j < posts.length; j++){
-          var post = posts[j];
+        _.each(posts, function(post){
           killLinks(post);
-        }
-
-      }
+        });
+      });
     }
   });
 }
-
-  
 
 function killLinks(item){
   var links = item.getElementsByTagName("a");
