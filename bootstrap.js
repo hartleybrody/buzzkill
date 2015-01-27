@@ -3,8 +3,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
     chrome.storage.sync.set({be_a_buzzkill: true});
 });
 
-// Listen for any changes to the URL of any tab.
-// see: http://developer.chrome.com/extensions/tabs.html#event-onUpdated
+// listen for any changes to the URL of any tab.
 chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
     // don't allow user to get to their page
@@ -12,12 +11,10 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
         chrome.tabs.update(tab.id, {url: "http://www.facebook.com/?no-buzzfeed-for-you!"});
     }
 
-    // decide if we're ready to show page action
-    if (tab.status !== "complete" || tab.url.toLowerCase().indexOf("facebook.com") === -1){
-        console.log("not here");
-        return;
+    if (tab.url.toLowerCase().indexOf("facebook.com") > -1){
+        chrome.pageAction.show(tab.id);
     }
-    chrome.pageAction.show(tab.id);
+
 });
 
 
