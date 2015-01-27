@@ -1,6 +1,9 @@
 var killed_stories = [];
 var storyContainerClasses = ["_5jmm"];
 
+var DEBUG = true;
+var DEBUG_DOMAIN = "athletics.bowdoin.edu";
+
 function buzzkill(){
 
   chrome.storage.sync.get("be_a_buzzkill", function(data){
@@ -40,7 +43,7 @@ function killLinks(item){
     else if (href.indexOf("buzzfeed.com") !== -1 ){
       linkType = "regular link";
     }
-    else if (href.indexOf("athletics.bowdoin.edu") !== -1){
+    else if (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1){
       linkType = "test link";
     }
 
@@ -54,12 +57,18 @@ function killLinks(item){
 function killItem(item, linkType){
 
   // set the story to be invisible
-  item.style.opacity = "0.5";
-  // item.style.display = "None";
+  if (DEBUG){
+    item.style.opacity = "0.5";
+  } else {
+    item.style.opacity = "0.0";
+    item.style.display = "None";
+  }
 
   // add this story to the list of killed stories
   if (killed_stories.indexOf(item) == -1){
-    console.log("killed a " + linkType);
+    if (DEBUG){
+      console.log("killed a " + linkType);
+    }
     killed_stories.push(item);
   }
 
