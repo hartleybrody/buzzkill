@@ -68,5 +68,8 @@ function killItem(item, linkType, pageType){
 
 }
 
-document.addEventListener("scroll", buzzkill);
-buzzkill();
+buzzkill(); // run once on page load
+
+// debounce the function so it's not running constantly
+var scrollBuzzkill = _.debounce(buzzkill, 50);
+document.addEventListener("scroll", scrollBuzzkill);
