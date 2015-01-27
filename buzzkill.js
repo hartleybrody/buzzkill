@@ -2,7 +2,7 @@ var killed_stories = [];
 var storyContainerClasses = ["_5jmm"];
 var bannedDomains = ["facebook.com/buzzfeed", "bzfd.it", "buzzfeed.com"];
 
-var DEBUG = true;
+var DEBUG = false;
 var DEBUG_DOMAIN = "athletics.bowdoin.edu";
 
 function buzzkill(){
