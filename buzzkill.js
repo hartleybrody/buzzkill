@@ -1,18 +1,9 @@
 var killed_stories = [];
-var shouldKill;
 
 function buzzkill(){
 
   chrome.storage.sync.get("be_a_buzzkill", function(data){
     if (data["be_a_buzzkill"]){
-
-      // be a buzz kill in news feed & groups
-      stories = document.getElementsByClassName("_5uch");
-      for(var i=0; i < stories.length; i++){
-        var story = stories[i];
-        killLinks(story, "feed");
-
-      }
 
       // be a buzz kill on people's walls
       wall_posts = document.getElementsByClassName("_5jmm");
@@ -26,7 +17,7 @@ function buzzkill(){
 
   
 
-function killLinks(item, pageType){
+function killLinks(item){
   var links = item.getElementsByTagName("a");
   for(var k=0; k < links.length; k++){
     var link = links[k];
@@ -49,12 +40,12 @@ function killLinks(item, pageType){
 
     // kill the story that contains this link
     if(linkType !== null){
-      killItem(item, linkType, pageType);
+      killItem(item, linkType);
     }
   }
 }
 
-function killItem(item, linkType, pageType){
+function killItem(item, linkType){
 
   // set the story to be invisible
   item.style.opacity = "0.5";
@@ -62,7 +53,7 @@ function killItem(item, linkType, pageType){
 
   // add this story to the list of killed stories
   if (killed_stories.indexOf(item) == -1){
-    console.log("killed a " + linkType + " on your " + pageType);
+    console.log("killed a " + linkType);
     killed_stories.push(item);
   }
 
