@@ -1,15 +1,21 @@
 var killed_stories = [];
+var storyContainerClasses = ["_5jmm"];
 
 function buzzkill(){
 
   chrome.storage.sync.get("be_a_buzzkill", function(data){
     if (data["be_a_buzzkill"]){
 
-      // be a buzz kill on people's walls
-      wall_posts = document.getElementsByClassName("_5jmm");
-      for(var i=0; i < wall_posts.length; i++){
-        var post = wall_posts[i];
-        killLinks(post, "wall");
+      // find all potential posts
+      for(var i=0; i < storyContainerClasses.length; i++){
+        var storyContainerClass = storyContainerClasses[i];
+        posts = document.getElementsByClassName(storyContainerClass);
+
+        for(var j=0; j < posts.length; j++){
+          var post = posts[j];
+          killLinks(post);
+        }
+
       }
     }
   });
