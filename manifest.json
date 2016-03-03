@@ -3,10 +3,10 @@
 
   "name": "Make Facebook Great Again",
   "description": "Reclaim your news feed.",
-  "version": "0.9.0.0",
+  "version": "0.9.0.2",
 
   "icons": {
-    "128": "images/make-america-great-again-128.jpg"
+    "128": "images/icon.png"
   },
 
   "permissions": [
@@ -30,7 +30,7 @@
 
   "page_action": {
     "default_title": "Make Facebook Great Again",
-    "default_icon": "images/make-america-great-again-128.jpg",
+    "default_icon": "images/icon.png",
     "default_popup": "popup.html"
   }
 
