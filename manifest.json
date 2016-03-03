@@ -23,8 +23,8 @@
 
    "content_scripts": [
     {
-      "matches": ["http://www.facebook.com/*", "https://www.facebook.com/*"],
-      "js": ["libs/underscore.min.js", "buzzkill.js"]
+      "matches": ["http://*.facebook.com/*", "https://*.facebook.com/*"],
+      "js": ["libs/underscore.min.js", "clean.js"]
     }
   ],
 

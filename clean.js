@@ -1,39 +1,58 @@
-var killed_stories = [];
+var removedStories = [];
 var storyContainerClasses = ["_5jmm"];
+
+// customize things you want to be killed
 var bannedDomains = ["facebook.com/buzzfeed", "bzfd.it", "buzzfeed.com"];
+var bannedTerms = ["trump", "sanders", "clinton"];
 
-var DEBUG = false;
-var DEBUG_DOMAIN = "athletics.bowdoin.edu";
+var DEBUG = true;
+var DEBUG_DOMAIN = "athletics.bowdoin.edu"; // for testing
+var DEBUG_TERM = "trump"; // for testing
 
-function buzzkill(){
+function cleanNewsFeed(){
 
-  chrome.storage.sync.get("be_a_buzzkill", function(data){
-    if (data["be_a_buzzkill"]){
+  chrome.storage.sync.get("clean_news_feed", function(data){
+    if (data["clean_news_feed"]){
       // find all potential posts
       _.each(storyContainerClasses, function(storyContainerClass){
         posts = document.getElementsByClassName(storyContainerClass);
         _.each(posts, function(post){
-          killLinks(post);
+          removeLinks(post);
+          removeTerms(post);
         });
       });
     }
   });
 }
 
-function killLinks(item){
+function removeLinks(item){
   var links = item.getElementsByTagName("a");
   _.each(links, function(link){
     var href = link.href.toLowerCase();
     _.each(bannedDomains, function(domain){
       if (href.indexOf(domain) !== -1 || (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1)){
-        killItem(item);
+        removeItem(item);
+      }
+    });
+
+  });
+}
+}
+
+function removeTerms(item){
+  var links = item.getElementsByTagName("a");
+  _.each(links, function(link){
+    var href = link.href.toLowerCase();
+    _.each(bannedDomains, function(domain){
+      if (href.indexOf(domain) !== -1 || (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1)){
+        removeItem(item);
       }
     });
 
   });
 }
 
-function killItem(item){
+function removeItem(item){
 
   // set the story to be invisible
   if (DEBUG){
@@ -44,17 +63,17 @@ function killItem(item){
   }
 
   // add this story to the list of killed stories
-  if (killed_stories.indexOf(item) == -1){
+  if (removedStories.indexOf(item) == -1){
     if (DEBUG){
       console.log("killed a link");
     }
-    killed_stories.push(item);
+    removedStories.push(item);
   }
 
 }
 
-buzzkill(); // run once on page load
+cleanNewsFeed(); // run once on page load
 
 // debounce the function so it's not running constantly
-var scrollBuzzkill = _.debounce(buzzkill, 50);
+var scrollBuzzkill = _.debounce(cleanNewsFeed, 300);
 document.addEventListener("scroll", scrollBuzzkill);
