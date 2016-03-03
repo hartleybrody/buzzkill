@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-    var input = document.getElementById('kill-buzz');
+    var input = document.getElementById('clean');
 
     // set the initial state of the checkbox
-    chrome.storage.sync.get("be_a_buzzkill", function(data){
-        if (data["be_a_buzzkill"]){
+    chrome.storage.sync.get("clean_news_feed", function(data){
+        if (data["clean_news_feed"]){
           input.checked = true;
         } else {
             input.checked = false;
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
     input.addEventListener("change", function(){
-        chrome.storage.sync.set({be_a_buzzkill: input.checked});
+        chrome.storage.sync.set({clean_news_feed: input.checked});
     });
 
 
