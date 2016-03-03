@@ -1,18 +1,26 @@
-BuzzKill
+Make Facebook Great Again
 ========
 
-[BuzzKill is a Chrome Extension](https://chrome.google.com/webstore/detail/buzzkill/dfglcbondofhakncnkoajpmimopmaggc) that automatically removes all Buzz Feed content from your Facebook browsing experience.
+Do you remember the good ol days of Facebook? Back when it was just buzzfeed quizzes and poke wars? No political rants from your uncle or your insufferable roommate.
 
-* "This extension has helped me reclaim hours of my day!" -Happy User
+I stand before you today to say that now, there is a solution. No longer must we accept the polarization, shouting into echo chambers and political grandstanding on our news feeds!
+
+It's time to take our news feed back! It's time we **Make Facebook Great Again.**
+
+[Make Facebook Great Again is a Chrome Extension](https://chrome.google.com/webstore/detail/make-facebook-great-again/jalneacdigdimhcbhdpgndfkghhkfkcm) that automatically removes news, opinions and lawlz about the presidential candidates from your Facebook news feed.
+
+* "Whew, what a relief" -Happy User
 * "I finally feel like I have my life back" -Happy User
-* "With BuzzKill installed, I can rest assured knowing that my children are safe from the most soul-sucking content on the entire internet." -Happy User
+* "With this extension installed, I can browse my news feed without stressing over the fate of the free world" -Happy User
 
-[Install the extension.](https://chrome.google.com/webstore/detail/buzzkill/dfglcbondofhakncnkoajpmimopmaggc) Feedback, issues and pull requests welcome! This is my first Chrome Extension. [Wanna learn how I built it?](http://blog.hartleybrody.com/chrome-extension/)
+[Install the extension.](https://chrome.google.com/webstore/detail/make-facebook-great-again/jalneacdigdimhcbhdpgndfkghhkfkcm)
+
+Feedback, issues and pull requests welcome.
 
 ### License
 The MIT License (MIT)
 
-Copyright (c) 2015 Hartley Brody
+Copyright (c) 2016 Hartley Brody
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
