@@ -5,7 +5,7 @@ var storyContainerClasses = ["_5jmm", "_5pcr"];
 var bannedDomains = [];
 var bannedTerms = ["trump", "sanders", "clinton", "rubio", "cruz"];
 
-var DEBUG = true;
+var DEBUG = false;
 var DEBUG_DOMAIN = "athletics.bowdoin.edu"; // for testing
 var DEBUG_TERM = "trump"; // for testing
 
