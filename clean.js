@@ -1,9 +1,9 @@
 var removedStories = [];
-var storyContainerClasses = ["_5jmm"];
+var storyContainerClasses = ["_5jmm", "_5pcr"];
 
-// customize things you want to be killed
-var bannedDomains = ["facebook.com/buzzfeed", "bzfd.it", "buzzfeed.com"];
-var bannedTerms = ["trump", "sanders", "clinton"];
+// customize things you want to be removed from your feed
+var bannedDomains = [];
+var bannedTerms = ["trump", "sanders", "clinton", "rubio", "cruz"];
 
 var DEBUG = true;
 var DEBUG_DOMAIN = "athletics.bowdoin.edu"; // for testing
@@ -31,28 +31,35 @@ function removeLinks(item){
     var href = link.href.toLowerCase();
     _.each(bannedDomains, function(domain){
       if (href.indexOf(domain) !== -1 || (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1)){
-        removeItem(item);
+        removeItem(item, "link", href);
       }
     });
-
   });
-}
 }
 
 function removeTerms(item){
-  var links = item.getElementsByTagName("a");
-  _.each(links, function(link){
-    var href = link.href.toLowerCase();
-    _.each(bannedDomains, function(domain){
-      if (href.indexOf(domain) !== -1 || (DEBUG && href.indexOf(DEBUG_DOMAIN) !== -1)){
-        removeItem(item);
+  var paragraphs = item.getElementsByTagName("p");
+  _.each(paragraphs, function(paragraph){
+    var text = paragraph.textContent.toLowerCase();
+    _.each(bannedTerms, function(term){
+      if (text.indexOf(term) !== -1 || (DEBUG && text.indexOf(DEBUG_TERM) !== -1)){
+        removeItem(item, "term in paragraph", term);
       }
     });
-
   });
+
+    var links = item.getElementsByTagName("a");
+    _.each(links, function(link){
+      var text = link.textContent.toLowerCase();
+      _.each(bannedTerms, function(term){
+        if (text.indexOf(term) !== -1 || (DEBUG && text.indexOf(DEBUG_TERM) !== -1)){
+          removeItem(item, "term in link", term);
+        }
+      });
+    });
 }
 
-function removeItem(item){
+function removeItem(item, offenseType, offenseMaterial){
 
   // set the story to be invisible
   if (DEBUG){
@@ -65,7 +72,7 @@ function removeItem(item){
   // add this story to the list of killed stories
   if (removedStories.indexOf(item) == -1){
     if (DEBUG){
-      console.log("killed a link");
+      console.log("killed an item because of bad " + offenseType + ": " + offenseMaterial);
     }
     removedStories.push(item);
   }
